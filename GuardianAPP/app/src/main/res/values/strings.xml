@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GuardianAPP</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="map">Map</string>
+    <string name="logout">Logout</string>
+    <string name="nabps">NAbps</string>
+    <string name="textview">TextView</string>
+    <string name="title_activity_driver_map">Map</string>
+</resources>

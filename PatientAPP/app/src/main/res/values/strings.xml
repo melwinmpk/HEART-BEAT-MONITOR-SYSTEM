@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PatientAPP</string>
+
+    <string name="password">Password</string>
+    <string name="signin">Signin</string>
+    <string name="button">Login</string>
+    <string name="description">Name</string>
+    <string name="note">Description</string>
+    <string name="username">UserName</string>
+    <string name="welcome">Welcome </string>
+    <string name="name">Name</string>
+    <string name="map">Map</string>
+    <string name="logout">Logout</string>
+    <string name="emergency">Emergency</string>
+    <string name="title_activity_patient__map">Map</string>
+    <string name="back">BACK</string>
+    <string name="nabps">NAbps</string>
+    <string name="todo">TODO</string>
+</resources>
