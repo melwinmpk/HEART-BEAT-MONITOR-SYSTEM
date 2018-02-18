@@ -1,5 +1,10 @@
 package com.mpk.melwin.patientapp;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
+    public static final String TAG = "ProfileActivity";
+
+    // Whether the Log Fragment is currently shown
+    private boolean mLogShown;
     Button Map,logoutb,ebutton;
     TextView Name1,Pulse;
     private String mProfileImageUrl;
@@ -37,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         ebutton =(Button) findViewById(R.id.emergencybutton);
         firebaseAuth = FirebaseAuth.getInstance();
         mProfileImage = (ImageView) findViewById(R.id.profileImage);
-        Pulse = (TextView) findViewById(R.id.pulse);
+       // Pulse = (TextView) findViewById(R.id.pulse);
 
 
         user = firebaseAuth.getCurrentUser();
@@ -46,6 +55,13 @@ public class ProfileActivity extends AppCompatActivity {
         DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("UsersInfo").child("Patient").child(user.getUid());
         //java.util.Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
         fethprofileImg();
+
+        if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            BluetoothFragment fragment = new BluetoothFragment();
+            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.commit();
+        }
 
       //  Glide.with(getApplication()).load(mProfileImageUrl).into(mProfileImage);
         Map.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +88,39 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+//////////////////////////////////////////////////////////////////////////////
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem logToggle = menu.findItem(R.id.menu_toggle_log);
+        //logToggle.setVisible(findViewById(R.id.sample_output) instanceof ViewAnimator);
+        //logToggle.setTitle(mLogShown ? R.string.sample_hide_log : R.string.sample_show_log);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_toggle_log:
+                mLogShown = !mLogShown;
+            /*    ViewAnimator output = (ViewAnimator) findViewById(R.id.sample_output);
+                if (mLogShown) {
+                    output.setDisplayedChild(1);
+                } else {
+                    output.setDisplayedChild(0);
+                }*/
+                supportInvalidateOptionsMenu();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
     private void fethprofileImg() {
         DatabaseReference mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("UsersInfo").child("Patient").child(user.getUid());
         mCustomerDatabase.addValueEventListener(new ValueEventListener() {

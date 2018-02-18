@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mpk.melwin.patientapp.ProfileActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/username"
@@ -45,14 +49,12 @@
         android:layout_below="@+id/logoutbutton"
         android:text="@string/emergency" />
 
-    <TextView
-        android:id="@+id/pulse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"
-        android:text="@string/nabps"
-        android:textSize="90sp"
-        android:textStyle="bold" />
+    <FrameLayout
+        android:id="@+id/sample_content_fragment"
+        android:layout_below="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_alignParentTop="true"
+        android:layout_weight="2" />
+    </LinearLayout>
 </RelativeLayout>
